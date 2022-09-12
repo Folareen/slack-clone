@@ -1,0 +1,14 @@
+.loading-logo{
+    width: 4rem;
+    height: 4rem;
+    animation: rotate 3s linear 0s infinite reverse;
+}
+
+@keyframes rotate{
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
