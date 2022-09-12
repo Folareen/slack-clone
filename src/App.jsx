@@ -10,7 +10,7 @@ import Header from './components/Header'
 function App() {
   const [user, loading] = useAuthState(auth);
 
-  if(true){
+  if(loading){
     return(
       <Loading />
     )
