@@ -6,6 +6,7 @@ import Channel from './pages/Channel'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
 import Header from './components/Header'
+import Error from './pages/Error'
 
 function App() {
   const [user, loading] = useAuthState(auth);
