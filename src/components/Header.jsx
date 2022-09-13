@@ -17,7 +17,7 @@ const Header = ({user}) => {
     }
 
   return (
-    <Flex py={2} px={4} bg={'#360d37'} justify={'space-between'} alignItems={'center'}>
+    <Flex py={2} px={4} bg={'#360d37'} justify={'space-between'} alignItems={'center'} position={'fixed'} w={'full'} zIndex={5} top={0}>
 
         <Box flex={0.15} textAlign={'right'}>
             <TimeIcon  color={'white'} />
