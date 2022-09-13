@@ -30,7 +30,9 @@ const Header = ({user}) => {
             {() => (
                 <>
                 <PopoverTrigger>
-                    <Avatar src={user?.photoURL} size={'sm'}  />
+                    <Button w={'max-content'} p={0} h={'max-content'} variant={'unstyled'}>
+                        <Avatar src={user?.photoURL} size={'sm'}  />
+                    </Button>
                 </PopoverTrigger>
                 <Portal>
                     <PopoverContent w={'max-content'}>
