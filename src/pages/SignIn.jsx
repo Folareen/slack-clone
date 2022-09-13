@@ -3,7 +3,7 @@ import { signInWithPopup} from "firebase/auth";
 import { auth } from '../../firebase';
 import { GoogleAuthProvider } from "firebase/auth";
 import {useNavigate } from 'react-router-dom';
-import { Box, Button, Center, Heading} from '@chakra-ui/react';
+import { Box, Button, Center, Heading, Link, Text} from '@chakra-ui/react';
 import logo from '../assets/slack-new-logo.svg'
 
 const SignIn = () => {
@@ -27,6 +27,11 @@ const SignIn = () => {
           </Button>
         </Box>
       </Box>
+      <Text position='fixed' bottom={'10px'} p={1}>
+        Developed By <Link href='https://www.twitter.com/_folareen_' target={'blank'} bg={'blue.100'}p={1}>
+          Folareen 👨‍💻
+        </Link>
+      </Text>
     </Center>
   )
 }
