@@ -19,8 +19,6 @@ const Workspace = () => {
     return <Workspaces/>
   }
 
-  console.log(workspaceID)
-
   if(loading){
     return <Loading />
   }
