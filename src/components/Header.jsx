@@ -3,7 +3,7 @@ import {signOut } from "firebase/auth";
 import { auth } from '../../firebase';
 import {useNavigate } from 'react-router-dom';
 import { Avatar, Button, Flex, Input, Popover, PopoverTrigger, PopoverContent, Portal, Box} from '@chakra-ui/react';
-import {TimeIcon} from '@chakra-ui/icons'
+import {ArrowForwardIcon, TimeIcon} from '@chakra-ui/icons'
 
 const Header = ({user}) => {
 
@@ -19,25 +19,26 @@ const Header = ({user}) => {
   return (
     <Flex py={2} px={4} bg={'#360d37'} justify={'space-between'} alignItems={'center'} position={'fixed'} w={'full'} zIndex={5} top={0}>
 
-        <Box flex={0.15} textAlign={'right'}>
-            <TimeIcon  color={'white'} />
+        <Box flex={0.2}>
         </Box>
 
-        <Input focusBorderColor='pink.300' placeholder='Search' flex={0.6} size={'sm'} />
+        <Flex flex={0.6} textAlign={'right'} alignItems={'center'}>
+            <TimeIcon  color={'white'} mx={2} />
+            <Input focusBorderColor='pink.300' placeholder='Search' size={'sm'} color={'white'} />
+        </Flex >
 
-        <Box flex={0.15} textAlign={'right'}>
+        <Box flex={0.2} textAlign={'right'}>
             <Popover closeOnBlur={false} placement='bottom' initialFocusRef={initRef}>
             {() => (
                 <>
                 <PopoverTrigger>
-                    <Button w={'max-content'} p={0} h={'max-content'} variant={'unstyled'}>
-                        <Avatar src={user?.photoURL} size={'sm'}  />
-                    </Button>
+                    <Avatar src={user?.photoURL} size={'sm'} _hover={{cursor: 'pointer'}} />
                 </PopoverTrigger>
                 <Portal>
-                    <PopoverContent w={'max-content'}>
+                    <PopoverContent w={'max-content'} border={'none'} outline={'none'} bg={'none'} mx={1} >
                         <Button colorScheme='red' onClick={logOut} ref={initRef} w={'max-content'} >
                         Logout
+                        <ArrowForwardIcon />
                         </Button>
                     </PopoverContent>
                 </Portal>

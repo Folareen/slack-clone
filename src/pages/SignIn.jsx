@@ -20,7 +20,7 @@ const SignIn = () => {
         <Heading as='h1' mb={5}>
           Welcome to Slack!
         </Heading>
-        <Box boxShadow={'xl'} p={4} border='1px' borderColor='gray.200' rounded='md' textAlign={'center'}>
+        <Box boxShadow={'xl'} p={4} border='1px' borderColor='whiteAlpha.400' rounded='md' textAlign={'center'}>
           <img src={logo} style={{width: '5rem', height: '5rem', margin: '2rem auto'}}/>
           <Button onClick={signIn} colorScheme={'pink'} w={'full'} >
             Sign In with Google
