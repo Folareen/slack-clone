@@ -28,7 +28,7 @@ function App() {
         </Routes>
         :
         <>
-        <Header/>
+        <Header user={user}/>
         <Routes>
           <Route path='/' element={<Workspace/>}/>
           <Route path='/:channelId' element={<Channel/>} />
