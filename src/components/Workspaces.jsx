@@ -13,6 +13,14 @@ const Workspaces = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [newWorkspace, setNewWorkspace] = useState('')
 
+    const openModal = () => {
+        if(workspaces.docs.length > 4){
+            alert("Max!")
+        }else{
+            onOpen()
+        }
+    }
+
     const createWorkspace = async () => {
         await addDoc(collection(db, "workspaces"), {
         name: newWorkspace
@@ -39,7 +47,7 @@ const Workspaces = () => {
                     ))
                     }
                     <Divider my={2}/>
-                    <Button my={1} variant={'outline'} onClick={onOpen}>
+                    <Button my={1} variant={'outline'} onClick={openModal}>
                         Create a new workspace
                     </Button>
                     <Modal isOpen={isOpen} onClose={onClose}  >
