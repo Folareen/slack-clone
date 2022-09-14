@@ -28,7 +28,7 @@ const SignIn = () => {
         </Box>
       </Box>
       <Text position='fixed' bottom={'10px'} p={1}>
-        Developed By <Link href='https://www.twitter.com/_folareen_' target={'blank'} bg={'blue.100'}p={1}>
+        Developed By <Link href='https://www.twitter.com/_folareen_' target={'blank'} bg={'pink.100'} rounded={'sm'} p={1}>
           Folareen 👨‍💻
         </Link>
       </Text>

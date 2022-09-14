@@ -24,7 +24,7 @@ const Header = ({user}) => {
 
         <Flex flex={0.6} textAlign={'right'} alignItems={'center'}>
             <TimeIcon  color={'white'} mx={2} />
-            <Input focusBorderColor='pink.300' placeholder='Search' size={'sm'} color={'white'} />
+            <Input focusBorderColor='whiteAlpha.300' placeholder='Search' size={'sm'} _placeholder={{color: 'white', textAlign: 'center'}} color={'white'} bg={'whiteAlpha.400'} border={'none'} rounded={'md'}/>
         </Flex >
 
         <Box flex={0.2} textAlign={'right'}>
