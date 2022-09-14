@@ -19,10 +19,10 @@ const Header = ({user}) => {
   return (
     <Flex py={2} px={4} bg={'#360d37'} justify={'space-between'} alignItems={'center'} position={'fixed'} w={'full'} zIndex={5} top={0}>
 
-        <Box flex={0.2}>
+        <Box flex={{base: 0, 'md' :0.2}}>
         </Box>
 
-        <Flex flex={0.6} textAlign={'right'} alignItems={'center'}>
+        <Flex flex={{base: 0.8, 'md':0.6}} textAlign={'right'} alignItems={'center'}>
             <TimeIcon  color={'white'} mx={2} />
             <Input focusBorderColor='whiteAlpha.300' placeholder='Search' size={'sm'} _placeholder={{color: 'white', textAlign: 'center'}} color={'white'} bg={'whiteAlpha.400'} border={'none'} rounded={'md'}/>
         </Flex >
