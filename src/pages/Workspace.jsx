@@ -24,7 +24,7 @@ const Workspace = () => {
   }
 
   return (
-    <Flex >
+    <Flex h={'100vh'} w={'100vw'} >
 
       <Box flex={{base: 1,md: 0.2}} overflowY={'scroll'}>
         { workspace &&

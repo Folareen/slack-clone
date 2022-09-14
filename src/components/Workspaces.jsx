@@ -15,18 +15,18 @@ const Workspaces = () => {
 
     const openModal = () => {
         if(workspaces.docs.length > 4){
-            alert("Max!")
+            alert("Maximum number of allowed workspaces reached!")
         }else{
             onOpen()
         }
     }
 
     const createWorkspace = async () => {
+        setNewWorkspace('')
         await addDoc(collection(db, "workspaces"), {
         name: newWorkspace
         })
         onClose()
-        setNewWorkspace('')
     }
 
   return (
