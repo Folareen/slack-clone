@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  workspaceId: null,
+  workspaceId: localStorage.getItem("workspaceId") || null,
 };
 
 const workspaceId = createSlice({
@@ -10,9 +10,11 @@ const workspaceId = createSlice({
   reducers: {
     enterWorkspace: (state, action) => {
       state.workspaceId = action.payload;
+      localStorage.setItem("workspaceId", action.payload);
     },
     leaveWorkspace: (state) => {
       state.workspaceId = null;
+      localStorage.removeItem("workspaceId");
     },
   },
 });
