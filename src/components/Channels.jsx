@@ -1,8 +1,9 @@
+import { useEffect } from 'react'
 import { collection, addDoc} from 'firebase/firestore'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { db } from '../../firebase'
 import {useSelector, useDispatch} from 'react-redux'
-import { Link as RouterLink} from 'react-router-dom'
+import { Link as RouterLink, useNavigate} from 'react-router-dom'
 import { Box, Flex, Heading, Button, Popover, PopoverTrigger, PopoverContent, Portal, Text, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, Input, useDisclosure, Link } from '@chakra-ui/react'
 import { ChevronDownIcon, ChevronLeftIcon, EditIcon, AtSignIcon, ChatIcon, ChevronRightIcon, SmallAddIcon} from '@chakra-ui/icons'
 import { useRef, useState } from 'react'
@@ -31,14 +32,16 @@ const ChannelLink = ({title, id}) => {
 }
 
 const Channels = ({title}) => {
-  const { workspaceId }= useSelector(state => state.workspaceId)
-    const [channels, loading] = useCollection(collection(db, "workspaces", workspaceId, "channels"))
+    const { workspaceId }= useSelector(state => state.workspaceId)
+    const workspaceID = workspaceId || 'null'
+    const [channels, loading] = useCollection(collection(db, "workspaces", workspaceID, "channels"))
     const initRef = useRef()
     const dispatch = useDispatch()
     const [newChannel, setNewChannel] = useState('')
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [ showAllOptions, setShowAllOptions] = useState(false)
-    const [showAllChannels, setShowAllChannels] = useState(false)
+    const [showAllChannels, setShowAllChannels] = useState(true)
+    const navigate = useNavigate()
 
     const addNewChannel = async () => {
         await addDoc(collection(db, "workspaces", workspaceId, "channels"), {
@@ -46,17 +49,26 @@ const Channels = ({title}) => {
         })
         onClose()
         setNewChannel('')
+        setShowAllChannels(true)
     }
+
+    useEffect(
+        () => {
+        if(!workspaceId){
+            navigate('/')
+        }
+        }, [workspaceId]
+    )
 
   return (
     <Box pt={'48px'} bg={'rgb(62, 14, 64)'} minH={'100vh'} >
 
-        <Flex alignItems={'center'} justify={'space-between'} p={2} borderTop='1px' borderTopColor='whiteAlpha.400'>
+        <Flex alignItems={'center'} justify={'space-between'} p={1.5} borderTop='1px' borderTopColor='whiteAlpha.400' position={'sticky'} top={'48px'} bg={'rgb(62, 14, 64)'}>
             <Popover closeOnBlur={false} placement='bottom' initialFocusRef={initRef} >
             {() => (
                 <>
                 <PopoverTrigger>
-                    <Heading as={'h3'} fontSize={'2xl'} textTransform={'capitalize'} fontWeight={'normal'} color={'white'} _hover={{cursor: 'pointer'}}>
+                    <Heading as={'h3'} fontSize={'xl'} textTransform={'capitalize'} fontWeight={'normal'} color={'white'} _hover={{cursor: 'pointer'}}>
                         {title}
                         <ChevronDownIcon color={'white'}/>
                     </Heading>
