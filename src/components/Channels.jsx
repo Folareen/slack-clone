@@ -8,11 +8,14 @@ import { Box, Flex, Heading, Button, Popover, PopoverTrigger, PopoverContent, Po
 import { ChevronDownIcon, ChevronLeftIcon, EditIcon, AtSignIcon, ChatIcon, ChevronRightIcon, SmallAddIcon} from '@chakra-ui/icons'
 import { useRef, useState } from 'react'
 import { leaveWorkspace } from '../features/workspaceSlice'
+import { FaFileAlt, FaBookmark, FaIdBadge, FaGripVertical } from 'react-icons/fa';
 
 const channelItems = [
     {icon: <ChatIcon />, title : 'Direct messages'},
-    // {icon: , title :'Unread messages' },
-    // {icon: , title :'Unread messages' },
+    {icon: <FaGripVertical />, title :'App' },
+    {icon: <FaBookmark />, title :'Saved Items' },
+    {icon: <FaFileAlt/>, title :'Files' },
+    {icon: <FaIdBadge/>, title :'People and user groups' },
 ]
 
 const ChannelOption = ({onClick, children}) => {
@@ -64,7 +67,7 @@ const Channels = ({title}) => {
   return (
     <Box pt={'48px'} bg={'rgb(62, 14, 64)'} minH={'100vh'} >
 
-        <Flex alignItems={'center'} justify={'space-between'} p={1.5} borderTop='1px' borderTopColor='whiteAlpha.400' position={'sticky'} top={'48px'} bg={'rgb(62, 14, 64)'}>
+        <Flex alignItems={'center'} justify={'space-between'} p={1.5} borderTop='1px' borderTopColor='whiteAlpha.400' position={'sticky'} top={'48px'} bg={'rgb(62, 14, 64)'} borderBottom='1px' borderBottomColor='whiteAlpha.400'>
             <Popover closeOnBlur={false} placement='bottom' initialFocusRef={initRef} >
             {() => (
                 <>
@@ -90,7 +93,7 @@ const Channels = ({title}) => {
             </Button>
         </Flex>
 
-        <Box p={2} borderTop='1px' borderTopColor='whiteAlpha.400' >
+        <Box p={2}  >
 
             <ChannelOption >
                 <AtSignIcon/>
