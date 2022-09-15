@@ -2,15 +2,29 @@ import { doc } from 'firebase/firestore'
 import React from 'react'
 import { useDocument } from "react-firebase-hooks/firestore"
 import { db } from '../../firebase'
-import { Flex, Heading, Img, Box, Text} from '@chakra-ui/react'
+import { Flex, Heading, Img, Box, Text, Skeleton} from '@chakra-ui/react'
 
 const Chat = ({workspaceId,channelId, messageId }) => {
     const [message, loading] = useDocument(doc(db, 'workspaces',workspaceId, 'channels', channelId, 'messages', messageId))
 
     return(
-        (!loading && message) &&
+        <Flex  my={6} w={'80%'} mx={4} zIndex={1}>
+        {
+            loading ?
+            <>
+            <Skeleton height={'40px'} width={'40px'} mr={3} my={1}/>
+            <Box>
+                <Flex my={1}>
+                    <Skeleton height={'12.5px'} width={'50px'} mr={2} />
+                    <Skeleton height={'7.5px'} width={'30px'} />
+                </Flex>
+                <Skeleton height={'20px'} width={'80px'} />
 
-        <Flex  my={6} w={'80%'} mx={4} >
+            </Box>
+
+            </>
+            :
+            <>
             <Img src={message?.data().photoUrl} alignSelf={'self-start'} rounded={'md'} boxSize={'40px'} mr={3} borderWidth='1px' borderColor='gray.100' borderStyle={'solid'} />
 
             <Box>
@@ -30,30 +44,12 @@ const Chat = ({workspaceId,channelId, messageId }) => {
 
             </Box>
 
+            </>
+
+        }
         </Flex>
 
     )
-
-
-  return (
-    <Flex>
-        <Img />
-
-        { (!loading && message) &&
-        <>
-            <Text>
-                {message?.data().user}
-            </Text>
-            <Text>
-                {message?.data().message}
-            </Text>
-            <Text>
-                {message?.data().time}
-            </Text>
-        </>
-        }
-    </Flex>
-  )
 }
 
 export default Chat

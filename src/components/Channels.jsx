@@ -9,6 +9,7 @@ import { ChevronDownIcon, ChevronLeftIcon, EditIcon, AtSignIcon, ChatIcon, Chevr
 import { useRef, useState } from 'react'
 import { leaveWorkspace } from '../features/workspaceSlice'
 import { FaFileAlt, FaBookmark, FaIdBadge, FaGripVertical } from 'react-icons/fa';
+import Loading from './Loading'
 
 const channelItems = [
     {icon: <ChatIcon />, title : 'Direct messages'},
@@ -64,10 +65,17 @@ const Channels = ({title}) => {
         }, [workspaceId]
     )
 
+    if(loading){
+        return(
+            <Loading />
+        )
+    }
+
+
   return (
     <Box pt={'48px'} bg={'rgb(62, 14, 64)'} minH={'100vh'} >
 
-        <Flex alignItems={'center'} justify={'space-between'} p={1.5} borderTop='1px' borderTopColor='whiteAlpha.400' position={'sticky'} top={'48px'} bg={'rgb(62, 14, 64)'} borderBottom='1px' borderBottomColor='whiteAlpha.400'>
+        <Flex alignItems={'center'} justify={'space-between'} py={1.5} px={3} borderTop='1px' borderTopColor='whiteAlpha.400' position={'sticky'} top={'48px'} bg={'rgb(62, 14, 64)'} borderBottom='1px' borderBottomColor='whiteAlpha.400'>
             <Popover closeOnBlur={false} placement='bottom' initialFocusRef={initRef} >
             {() => (
                 <>
@@ -167,7 +175,6 @@ const Channels = ({title}) => {
                 </ModalContent>
             </Modal>
         </Box>
-
 
     </Box>
   )

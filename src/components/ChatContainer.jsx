@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { auth, db } from '../../firebase'
 import { useSelector} from 'react-redux'
 import Chat from './Chat'
-import { Box, Flex, Text, Popover, PopoverTrigger, Heading, Portal, PopoverContent, Button, Input, FormControl, InputGroup, InputRightElement, Center} from '@chakra-ui/react'
+import { Box, Flex, Text, Popover, PopoverTrigger, Heading, Portal, PopoverContent, Button, Input, InputGroup, InputRightElement,Stack,Skeleton} from '@chakra-ui/react'
 import { ChevronDownIcon, ChevronLeftIcon, QuestionOutlineIcon } from '@chakra-ui/icons'
 import { FaTelegramPlane } from 'react-icons/fa';
 import { useAuthState} from 'react-firebase-hooks/auth'
@@ -14,16 +14,11 @@ const ChatContainer = ({channelId, title}) => {
   const { workspaceId } = useSelector(state => state.workspaceId)
   const workspaceID = workspaceId || 'null'
   const [messages, loading] = useCollection(query(collection(db, "workspaces", workspaceID, "channels", channelId, 'messages'),orderBy("time", 'asc')))
-
   const navigate = useNavigate()
   const initRef = useRef()
   const [newMessage, setNewMessage] = useState('')
   const [user] = useAuthState(auth);
   const containerRef = useRef()
-
-  
-  console.log(messages?.docs)
-  console.log(user.displayName)
 
   const sendMessage = async(e) => {
       e.preventDefault()
@@ -44,17 +39,19 @@ const ChatContainer = ({channelId, title}) => {
 
   if(loading){
     return(
-      <div>
-          loading
-      </div>
+    <Box minH={'100vh'} w={'100%'} pt={'48px'} pb={'60px'} position={'relative'} >
+      <Stack spacing={'3vh'}>
+        <Skeleton height={'50px'} />
+        <Skeleton height={'85vh'} />
+      </Stack>
+    </Box>
     )
   }
 
-
   return (
-    <Box minH={'100vh'} w={'100%'} pt={'48px'} pb={'60px'} position={'relative'} ref={containerRef}>
+    <Box minH={'100vh'} w={'100%'} pt={'48px'} pb={'60px'} position={'relative'} ref={containerRef} >
 
-      <Flex alignItems={'center'} justify={'space-between'} p={3.5} borderBottom='1px' borderBottomColor='gray.300' position={'sticky'} top={'48px'} bg={'white'}>
+      <Flex alignItems={'center'} justify={'space-between'} p={3.5} borderBottom='1px' borderBottomColor='gray.300' position={'sticky'} top={'48px'} bg={'white'} zIndex={3}>
           <Popover closeOnBlur={false} placement='bottom' initialFocusRef={initRef} >
           {() => (
               <>
