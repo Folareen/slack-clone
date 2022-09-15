@@ -4,14 +4,18 @@ import { auth } from '../../firebase';
 import {useNavigate } from 'react-router-dom';
 import { Avatar, Button, Flex, Input, Popover, PopoverTrigger, PopoverContent, Portal, Box} from '@chakra-ui/react';
 import {ArrowForwardIcon, TimeIcon} from '@chakra-ui/icons'
+import { leaveWorkspace } from '../features/workspaceSlice'
+import {useDispatch} from 'react-redux'
 
 const Header = ({user}) => {
 
     const navigate = useNavigate()
     const initRef = useRef()
+    const dispatch = useDispatch()
 
     const logOut = () => {
         signOut(auth).then(() => {
+            dispatch(leaveWorkspace())
             navigate('/')
         })
     }
