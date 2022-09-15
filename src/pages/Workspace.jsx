@@ -7,7 +7,6 @@ import { db} from '../../firebase'
 import Channels from '../components/Channels'
 import { Box, Flex, Hide, Show } from '@chakra-ui/react'
 import Loading from '../components/Loading'
-// import ChatContainer from '../components/ChatContainer'
 import WelcomeChannel from '../components/WelcomeChannel'
 
 const Workspace = () => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../assets/slack-new-logo.svg'
+import logo from '/slack-new-logo.svg'
 import { Center} from '@chakra-ui/react'
 
 const Loading = () => {
