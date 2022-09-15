@@ -1,4 +1,4 @@
-import { collection, addDoc, serverTimestamp, Timestamp } from 'firebase/firestore'
+import { collection, addDoc, serverTimestamp, orderBy, query } from 'firebase/firestore'
 import React, {useEffect, useRef, useState} from 'react'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { useNavigate } from 'react-router-dom'
@@ -13,7 +13,7 @@ import { useAuthState} from 'react-firebase-hooks/auth'
 const ChatContainer = ({channelId, title}) => {
   const { workspaceId } = useSelector(state => state.workspaceId)
   const workspaceID = workspaceId || 'null'
-  const [messages, loading] = useCollection(collection(db, "workspaces", workspaceID, "channels", channelId, 'messages'))
+  const [messages, loading] = useCollection(query(collection(db, "workspaces", workspaceID, "channels", channelId, 'messages'),orderBy("time", 'asc')))
 
   const navigate = useNavigate()
   const initRef = useRef()
@@ -21,7 +21,6 @@ const ChatContainer = ({channelId, title}) => {
   const [user] = useAuthState(auth);
   const containerRef = useRef()
 
-  
   
   console.log(messages?.docs)
   console.log(user.displayName)
@@ -39,7 +38,7 @@ const ChatContainer = ({channelId, title}) => {
 
   useEffect(
     () => {
-      containerRef.current?.scrollIntoView({block: "end", behavior: 'smooth'});
+      containerRef.current?.scrollIntoView({block: "end"});
     }, [messages]
   )
 

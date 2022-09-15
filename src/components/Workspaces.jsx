@@ -1,14 +1,14 @@
 import React, {useState} from 'react'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { db } from '../../firebase';
-import {collection, addDoc } from 'firebase/firestore';
+import {collection, addDoc, serverTimestamp, orderBy, query } from 'firebase/firestore';
 import {useDispatch} from 'react-redux'
 import { enterWorkspace } from '../features/workspaceSlice';
 import { Center, Button, Flex, Heading, Box, Spinner, Divider, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, Input } from '@chakra-ui/react';
 import { useDisclosure } from '@chakra-ui/react'
 
 const Workspaces = () => {
-    const [workspaces, loading] = useCollection(collection(db, "workspaces"));
+    const [workspaces, loading] = useCollection(query(collection(db, "workspaces"), orderBy('time', 'asc')));
     const dispatch = useDispatch()
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [newWorkspace, setNewWorkspace] = useState('')
@@ -24,7 +24,8 @@ const Workspaces = () => {
     const createWorkspace = async () => {
         setNewWorkspace('')
         await addDoc(collection(db, "workspaces"), {
-        name: newWorkspace
+        name: newWorkspace,
+        time: serverTimestamp()
         })
         onClose()
     }

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { collection, addDoc} from 'firebase/firestore'
+import { collection, addDoc, serverTimestamp, orderBy, query} from 'firebase/firestore'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { db } from '../../firebase'
 import {useSelector, useDispatch} from 'react-redux'
@@ -34,7 +34,7 @@ const ChannelLink = ({title, id}) => {
 const Channels = ({title}) => {
     const { workspaceId }= useSelector(state => state.workspaceId)
     const workspaceID = workspaceId || 'null'
-    const [channels, loading] = useCollection(collection(db, "workspaces", workspaceID, "channels"))
+    const [channels, loading] = useCollection(query(collection(db, "workspaces", workspaceID, "channels"), orderBy('time', 'asc')))
     const initRef = useRef()
     const dispatch = useDispatch()
     const [newChannel, setNewChannel] = useState('')
@@ -45,7 +45,8 @@ const Channels = ({title}) => {
 
     const addNewChannel = async () => {
         await addDoc(collection(db, "workspaces", workspaceId, "channels"), {
-        name: newChannel
+        name: newChannel,
+        time: serverTimestamp()
         })
         onClose()
         setNewChannel('')
