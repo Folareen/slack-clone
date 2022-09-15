@@ -28,11 +28,11 @@ const Chat = ({workspaceId,channelId, messageId }) => {
             <Img src={message?.data().photoUrl} alignSelf={'self-start'} rounded={'md'} boxSize={'40px'} mr={3} borderWidth='1px' borderColor='gray.100' borderStyle={'solid'} />
 
             <Box>
-                <Flex>
-                    <Heading as={'h5'} fontSize={'md'} mr={2}>
+                <Flex w={'max-content'}>
+                    <Heading as={'h5'} fontSize={'md'} mr={2} w={'max-content'}>
                         {message?.data().name}
                     </Heading>
-                    <Text fontSize={'x-small'}>
+                    <Text fontSize={'x-small'} w={'max-content'}>
                         { 
                         new Date(message?.data().time?.toDate()).toUTCString()
                         }
